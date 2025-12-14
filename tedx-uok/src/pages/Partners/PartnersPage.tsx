@@ -26,9 +26,7 @@ const PartnersPage: React.FC<PartnersPageProps> = ({ partners }) => {
 
   const renderPartnerTier = (
     tier: string,
-    tierPartners: Partner[],
-    gridCols: string,
-    maxHeight: string
+    tierPartners: Partner[]
   ) => {
     if (!tierPartners.length) return null;
 
@@ -42,7 +40,7 @@ const PartnersPage: React.FC<PartnersPageProps> = ({ partners }) => {
             {tier} Partners
           </h2>
         </div>
-        <div className={`grid ${gridCols} gap-6`}>
+        <div className={sharedStyles.layout.partnerGrid}>
           {tierPartners.map((partner) => (
             <div
               key={partner.id}
@@ -52,8 +50,11 @@ const PartnersPage: React.FC<PartnersPageProps> = ({ partners }) => {
                 <img
                   src={partner.logo_url}
                   alt={partner.name}
-                  className={`${maxHeight} w-auto object-contain`}
+                  className={`${sharedStyles.partner.logoMaxHeight} w-auto object-contain`}
                   loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://via.placeholder.com/200x100/e8e2dc/666666?text=No+Logo';
+                  }}
                 />
               </div>
               <div className={sharedStyles.card.content}>
@@ -97,11 +98,11 @@ const PartnersPage: React.FC<PartnersPageProps> = ({ partners }) => {
       <section className={sharedStyles.layout.contentSection}>
         <div className="max-w-7xl mx-auto">
           <div className="space-y-24">
-            {renderPartnerTier('Title', partnersByTier.Title, 'grid-cols-2 md:grid-cols-3', 'max-h-20')}
-            {renderPartnerTier('Gold', partnersByTier.Gold, 'grid-cols-2 md:grid-cols-3', 'max-h-20')}
-            {renderPartnerTier('Silver', partnersByTier.Silver, 'grid-cols-2 md:grid-cols-3', 'max-h-20')}
-            {renderPartnerTier('Bronze', partnersByTier.Bronze, 'grid-cols-2 md:grid-cols-3', 'max-h-20')}
-            {renderPartnerTier('In-kind', partnersByTier['In-kind'], 'grid-cols-2 md:grid-cols-3', 'max-h-20')}
+            {renderPartnerTier('Title', partnersByTier.Title)}
+            {renderPartnerTier('Gold', partnersByTier.Gold)}
+            {renderPartnerTier('Silver', partnersByTier.Silver)}
+            {renderPartnerTier('Bronze', partnersByTier.Bronze)}
+            {renderPartnerTier('In-kind', partnersByTier['In-kind'])}
           </div>
         </div>
       </section>

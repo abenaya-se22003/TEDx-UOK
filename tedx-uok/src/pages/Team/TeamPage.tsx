@@ -17,7 +17,7 @@ interface TeamPageProps {
 
 const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
   const licensees = teamMembers.filter(member => member.type === 'Licensee');
-  const exco = teamMembers.filter(member => member.type === 'EXCO');
+  const executiveCommittee = teamMembers.filter(member => member.type === 'EXCO');
   const directors = teamMembers.filter(member => member.type === 'Director');
 
   const renderTeamSection = (title: string, members: TeamMember[], trackNumber: string) => (
@@ -46,6 +46,9 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
                 alt={member.full_name}
                 className="w-full h-full object-cover"
                 loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = 'https://via.placeholder.com/400x500/e8e2dc/666666?text=No+Image';
+                }}
               />
             </div>
             <div className={`${sharedStyles.card.content} space-y-1`}>
@@ -93,7 +96,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
       <section className={sharedStyles.layout.contentSection}>
         <div className="max-w-7xl mx-auto space-y-24">
           {licensees.length > 0 && renderTeamSection('Licensee', licensees, 'TEAM 01')}
-          {exco.length > 0 && renderTeamSection('Executive Committee', exco, 'TEAM 02')}
+          {executiveCommittee.length > 0 && renderTeamSection('Executive Committee', executiveCommittee, 'TEAM 02')}
           {directors.length > 0 && renderTeamSection('Directors', directors, 'TEAM 03')}
         </div>
       </section>
