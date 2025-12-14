@@ -1,4 +1,5 @@
 import React from 'react';
+import { theme } from '../../utils/constants';
 
 interface TeamMember {
   id: string;
@@ -6,7 +7,7 @@ interface TeamMember {
   role: string;
   type: 'Licensee' | 'EXCO' | 'Director';
   photo_url: string;
-  function_area ?: string;
+  function_area?: string;
 }
 
 interface TeamPageProps {
@@ -23,7 +24,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
       <h2
         id={`${title.toLowerCase().replace(/\s+/g, '-')}`}
         className="text-3xl font-bold mb-10 text-white text-center"
-        style={{ fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif' }}
+        style={{ fontFamily: theme.fontStack }}
       >
         {title}
       </h2>
@@ -33,15 +34,15 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
             key={member.id}
             className="group cursor-pointer transition-all duration-300 w-full max-w-sm"
             style={{
-              backgroundColor: '#0E0E0E',
-              border: '1px solid #1F1F1F',
-              borderRadius: '12px',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              backgroundColor: theme.colors.cardBg,
+              border: `1px solid ${theme.colors.cardBorder}`,
+              borderRadius: theme.radii.card,
+              boxShadow: theme.shadow,
             }}
           >
             <div
               className="aspect-[3/4] overflow-hidden"
-              style={{ borderTopLeftRadius: '12px', borderTopRightRadius: '12px' }}
+              style={{ borderTopLeftRadius: theme.radii.card, borderTopRightRadius: theme.radii.card }}
             >
               <img
                 src={member.photo_url}
@@ -51,16 +52,19 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
               />
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-2 text-white" style={{ fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif' }}>
+              <h3 className="text-xl font-bold mb-2 text-white" style={{ fontFamily: theme.fontStack }}>
                 {member.full_name}
               </h3>
-              <p style={{ color: '#A0A0A0', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif' }}>
+              <p style={{ color: theme.colors.muted, fontFamily: theme.fontStack }}>
                 {member.role}
               </p>
               {member.function_area && (
-                <p style={{ color: '#A0A0A0', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif' }}>
+                <span
+                  className="inline-flex mt-2 px-3 py-1 text-sm font-medium rounded-full"
+                  style={{ backgroundColor: theme.colors.badgeBg, color: theme.colors.accent, fontFamily: theme.fontStack }}
+                >
                   {member.function_area}
-                </p>
+                </span>
               )}
             </div>
           </article>
@@ -71,16 +75,16 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
 
   return (
     <main
-      style={{ backgroundColor: '#000000', minHeight: '100vh', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif' }}
+      style={{ backgroundColor: theme.colors.background, minHeight: '100vh', fontFamily: theme.fontStack }}
       className="flex items-center justify-center"
     >
       <div className="max-w-7xl mx-auto px-6 py-20">
         <header className="text-center mb-24">
-          <p className="text-5xl uppercase tracking-normal mb-4 font-medium" style={{ color: '#EB0028' }}>
+          <p className="text-5xl uppercase tracking-normal mb-4 font-medium" style={{ color: theme.colors.accent }}>
             TEAM
           </p>
           <h1 className="text-7xl font-bold mb-6 text-white">Organizing Team</h1>
-          <p className="text-lg max-w-3xl mx-auto" style={{ color: '#A0A0A0' }}>
+          <p className="text-lg max-w-3xl mx-auto" style={{ color: theme.colors.muted }}>
             Licensee, Executive Committee, and Directors
           </p>
         </header>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { theme } from '../../utils/constants';
 
 interface Partner {
   id: string;
@@ -12,13 +13,23 @@ interface PartnersPageProps {
   partners: Partner[];
 }
 
+const cardStyle = {
+  backgroundColor: theme.colors.cardBg,
+  border: `1px solid ${theme.colors.cardBorder}`,
+  borderRadius: theme.radii.card,
+  minHeight: '180px',
+  boxShadow: theme.shadow,
+};
+
 const PartnersPage: React.FC<PartnersPageProps> = ({ partners }) => {
+  const activePartners = partners.filter((p) => p.isActive ?? true);
+
   const partnersByTier = {
-    Title: partners.filter((p) => p.tier === 'Title'),
-    Gold: partners.filter((p) => p.tier === 'Gold'),
-    Silver: partners.filter((p) => p.tier === 'Silver'),
-    Bronze: partners.filter((p) => p.tier === 'Bronze'),
-    'In-kind': partners.filter((p) => p.tier === 'In-kind'),
+    Title: activePartners.filter((p) => p.tier === 'Title'),
+    Gold: activePartners.filter((p) => p.tier === 'Gold'),
+    Silver: activePartners.filter((p) => p.tier === 'Silver'),
+    Bronze: activePartners.filter((p) => p.tier === 'Bronze'),
+    'In-kind': activePartners.filter((p) => p.tier === 'In-kind'),
   };
 
   const renderPartnerTier = (
@@ -34,7 +45,7 @@ const PartnersPage: React.FC<PartnersPageProps> = ({ partners }) => {
         <h2
           id={`${tier.toLowerCase()}-partners`}
           className="text-3xl font-bold mb-10 text-white text-center"
-          style={{ fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif' }}
+          style={{ fontFamily: theme.fontStack }}
         >
           {tier} Partners
         </h2>
@@ -43,13 +54,7 @@ const PartnersPage: React.FC<PartnersPageProps> = ({ partners }) => {
             <div
               key={partner.id}
               className="group cursor-pointer flex items-center justify-center p-8 transition-all duration-300 w-full"
-              style={{
-                backgroundColor: '#0E0E0E',
-                border: '1px solid #1F1F1F',
-                borderRadius: '12px',
-                minHeight: '180px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-              }}
+              style={cardStyle}
             >
               <img
                 src={partner.logo_url}
@@ -66,34 +71,25 @@ const PartnersPage: React.FC<PartnersPageProps> = ({ partners }) => {
 
   return (
     <main
-      style={{ backgroundColor: '#000000', minHeight: '100vh', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif' }}
+      style={{ backgroundColor: theme.colors.background, minHeight: '100vh', fontFamily: theme.fontStack }}
       className="flex items-center justify-center"
     >
       <div className="max-w-7xl mx-auto px-6 py-20">
         <header className="text-center mb-24">
           <p
             className="text-5xl uppercase tracking-normal mb-4 font-medium"
-            style={{ color: '#EB0028' }}
+            style={{ color: theme.colors.accent }}
           >
             PARTNERS
           </p>
           <h1 className="text-7xl font-bold mb-6 text-white">Partners &amp; Sponsors</h1>
-          <p className="text-lg max-w-3xl mx-auto mb-10" style={{ color: '#A0A0A0' }}>
+          <p className="text-lg max-w-3xl mx-auto mb-10" style={{ color: theme.colors.muted }}>
             Tiered showcases. Equal spotlight. Simple ways to partner.
           </p>
           <button
             type="button"
-            className="px-8 py-4 font-bold text-white transition-colors duration-200"
-            style={{
-              backgroundColor: '#EB0028',
-              borderRadius: '9999px',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#D00024';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#EB0028';
-            }}
+            className="px-8 py-4 font-bold text-white rounded-full transition-colors duration-200 hover:brightness-90 focus-visible:brightness-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
+            style={{ backgroundColor: theme.colors.accent, fontFamily: theme.fontStack, borderRadius: theme.radii.pill }}
             aria-label="Become a Partner"
           >
             Become a Partner
