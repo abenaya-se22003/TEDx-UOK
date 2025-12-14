@@ -1,5 +1,5 @@
 import React from 'react';
-import { theme } from '../../utils/constants';
+import { sharedStyles } from '../../utils/constants';
 
 interface TeamMember {
   id: string;
@@ -8,6 +8,7 @@ interface TeamMember {
   type: 'Licensee' | 'EXCO' | 'Director';
   photo_url: string;
   function_area?: string;
+  quote?: string;
 }
 
 interface TeamPageProps {
@@ -19,52 +20,43 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
   const exco = teamMembers.filter(member => member.type === 'EXCO');
   const directors = teamMembers.filter(member => member.type === 'Director');
 
-  const renderTeamSection = (title: string, members: TeamMember[]) => (
+  const renderTeamSection = (title: string, members: TeamMember[], trackNumber: string) => (
     <section className="mb-20" aria-labelledby={`${title.toLowerCase().replace(/\s+/g, '-')}`}>
-      <h2
-        id={`${title.toLowerCase().replace(/\s+/g, '-')}`}
-        className="text-3xl font-bold mb-10 text-white text-center"
-        style={{ fontFamily: theme.fontStack }}
-      >
-        {title}
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
+      <div className="flex items-center justify-between mb-10">
+        <div>
+          <p className={`${sharedStyles.typography.trackLabel} mb-2`}>{trackNumber}</p>
+          <h2
+            id={`${title.toLowerCase().replace(/\s+/g, '-')}`}
+            className={sharedStyles.typography.sectionTitle}
+          >
+            {title}
+          </h2>
+        </div>
+      </div>
+
+      <div className={sharedStyles.layout.gridThreeCol}>
         {members.map((member) => (
           <article
             key={member.id}
-            className="group cursor-pointer transition-all duration-300 w-full max-w-sm"
-            style={{
-              backgroundColor: theme.colors.cardBg,
-              border: `1px solid ${theme.colors.cardBorder}`,
-              borderRadius: theme.radii.card,
-              boxShadow: theme.shadow,
-            }}
+            className={sharedStyles.card.base}
           >
-            <div
-              className="aspect-[3/4] overflow-hidden"
-              style={{ borderTopLeftRadius: theme.radii.card, borderTopRightRadius: theme.radii.card }}
-            >
+            <div className={sharedStyles.card.imageContainer}>
               <img
                 src={member.photo_url}
                 alt={member.full_name}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-full object-cover"
                 loading="lazy"
               />
             </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold mb-2 text-white" style={{ fontFamily: theme.fontStack }}>
+            <div className={`${sharedStyles.card.content} space-y-1`}>
+              <h3 className={sharedStyles.typography.cardTitle}>
                 {member.full_name}
               </h3>
-              <p style={{ color: theme.colors.muted, fontFamily: theme.fontStack }}>
-                {member.role}
-              </p>
+              <p className={sharedStyles.typography.cardSubtitle}>{member.role}</p>
               {member.function_area && (
-                <span
-                  className="inline-flex mt-2 px-3 py-1 text-sm font-medium rounded-full"
-                  style={{ backgroundColor: theme.colors.badgeBg, color: theme.colors.accent, fontFamily: theme.fontStack }}
-                >
+                <p className={sharedStyles.typography.cardAccent}>
                   {member.function_area}
-                </span>
+                </p>
               )}
             </div>
           </article>
@@ -74,25 +66,37 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
   );
 
   return (
-    <main
-      style={{ backgroundColor: theme.colors.background, minHeight: '100vh', fontFamily: theme.fontStack }}
-      className="flex items-center justify-center"
-    >
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        <header className="text-center mb-24">
-          <p className="text-5xl uppercase tracking-normal mb-4 font-medium" style={{ color: theme.colors.accent }}>
-            TEAM
-          </p>
-          <h1 className="text-7xl font-bold mb-6 text-white">Organizing Team</h1>
-          <p className="text-lg max-w-3xl mx-auto" style={{ color: theme.colors.muted }}>
-            Licensee, Executive Committee, and Directors
-          </p>
-        </header>
-
-        {licensees.length > 0 && renderTeamSection('Licensee', licensees)}
-        {exco.length > 0 && renderTeamSection('Executive Committee', exco)}
-        {directors.length > 0 && renderTeamSection('Directors', directors)}
-      </div>
+    <main className={sharedStyles.layout.main}>
+      {/* Hero */}
+      <section className={sharedStyles.layout.heroSection}>
+        <div className={sharedStyles.layout.heroContainer}>
+          <div className={sharedStyles.layout.heroGrid}>
+            <div>
+              <h1 className={`${sharedStyles.typography.heroTitle} mb-4`}>
+                <span className={sharedStyles.colors.tedxRed}>TEDx</span>
+                <span className={sharedStyles.colors.black}>UOK</span>
+              </h1>
+              <h2 className={`${sharedStyles.typography.heroTitle} ${sharedStyles.colors.black}`}>Team</h2>
+            </div>
+            <div className="flex items-center justify-start lg:justify-end">
+              <p className={`${sharedStyles.typography.description} max-w-md lg:text-right`}>
+                Meet the licensee, executive committee, and directors who shape TEDxUOK.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <div className={sharedStyles.layout.divider} />
+      
+      {/* Team Sections */}
+      <section className={sharedStyles.layout.contentSection}>
+        <div className="max-w-7xl mx-auto space-y-24">
+          {licensees.length > 0 && renderTeamSection('Licensee', licensees, 'TEAM 01')}
+          {exco.length > 0 && renderTeamSection('Executive Committee', exco, 'TEAM 02')}
+          {directors.length > 0 && renderTeamSection('Directors', directors, 'TEAM 03')}
+        </div>
+      </section>
     </main>
   );
 };
