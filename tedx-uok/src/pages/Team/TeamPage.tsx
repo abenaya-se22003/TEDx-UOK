@@ -59,7 +59,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
                   <a
                     href={member.linkedin_url}
                     target="_blank"
-                    rel="noreferrer noopener"
+                    rel="noopener noreferrer"
                     aria-label={`Open ${member.full_name} LinkedIn profile`}
                     className="inline-flex items-center text-gray-300 hover:text-white transition-colors"
                     title="LinkedIn"
