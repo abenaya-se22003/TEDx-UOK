@@ -8,6 +8,7 @@ export const sharedStyles = {
 	},
 	// Typography
 	typography: {
+		brandTitle: 'text-6xl md:text-7xl lg:text-8xl font-bold leading-tight',
 		heroTitle: 'text-6xl md:text-7xl lg:text-8xl font-bold leading-tight',
 		sectionTitle: 'text-4xl md:text-5xl font-bold text-white',
 		cardTitle: 'font-bold text-white text-lg',
@@ -27,9 +28,12 @@ export const sharedStyles = {
 		main: 'min-h-screen bg-black',
 		heroSection: 'pt-20 pb-16 px-6',
 		heroContainer: 'max-w-7xl mx-auto',
-		heroGrid: 'grid grid-cols-1 lg:grid-cols-2 gap-8 items-center',
+		heroFlex: 'flex flex-col md:flex-row justify-between items-start gap-8',
+		heroAside: 'max-w-md md:text-right md:ml-auto',
 		divider: 'border-t border-gray-200 max-w-7xl mx-auto',
 		contentSection: 'py-16 px-6',
+		pageContainer: 'max-w-7xl mx-auto',
+		pageStack: 'max-w-7xl mx-auto space-y-24',
 		gridThreeCol: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
 		partnerGrid: 'grid grid-cols-2 md:grid-cols-3 gap-6',
 	},

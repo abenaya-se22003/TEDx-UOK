@@ -1,9 +1,11 @@
 @import "tailwindcss";
+@config "../tailwind.config.ts";
+
 
 @font-face {
   font-family: "HelveticaNeue";
   src: url("./assets/fonts/HelveticaNeueHv.ttf") format("truetype");
-  font-weight: 800;
+  font-weight: 800; 
   font-style: normal;
   font-display: swap;
 }
@@ -54,11 +56,8 @@
   color: var(--white);
   background-color: var(--black);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+    --primary: 348 100% 46%;
+    --primary-foreground: 0 0% 100%;
 
 a {
   font-weight: 500;

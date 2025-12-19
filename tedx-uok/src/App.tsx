@@ -1,6 +1,10 @@
-import './App.css'
-import AppRouter from "./routes/AppRouter";
 
-export default function App() {
-  return <AppRouter />;
+import Agenda from './pages/Agenda/AgendaPage'
+
+function App() {
+  return (
+    <>
+      <Agenda/>
+    </>
+  )
 }
