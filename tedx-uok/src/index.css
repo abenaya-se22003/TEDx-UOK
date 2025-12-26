@@ -8,15 +8,15 @@
   font-weight: 400;
 
   /* Brand colors (Strict) */
-  --tedx-red: #EB0028;
+  --tedx-red: #eb0028;
   --black: #000000;
-  --white: #FFFFFF;
+  --white: #ffffff;
 
   /* Semantic Colors */
   --background: var(--black);
   --foreground: var(--white);
-  --card-bg: #0E0E0E;
-  --card-border: #1F1F1F;
+  --card-bg: #0e0e0e;
+  --card-border: #1f1f1f;
 
   color-scheme: dark;
   color: var(--white);
@@ -33,15 +33,15 @@
   font-weight: 400;
 
   /* Brand colors (Strict) */
-  --tedx-red: #EB0028;
+  --tedx-red: #eb0028;
   --black: #000000;
-  --white: #FFFFFF;
+  --white: #ffffff;
 
   /* Semantic Colors */
   --background: var(--black);
   --foreground: var(--white);
-  --card-bg: #0E0E0E;
-  --card-border: #1F1F1F;
+  --card-bg: #0e0e0e;
+  --card-border: #1f1f1f;
 
   color-scheme: dark;
   color: var(--white);
@@ -106,9 +106,9 @@
 
     /* Legacy Hex variables from strictly brand-guided CSS (adapted to map to HSL where appropriate or kept as Hex if unique) */
     --black: #000000;
-    --white: #FFFFFF;
-    --card-bg: #0E0E0E;
-    --card-border: #1F1F1F;
+    --white: #ffffff;
+    --card-bg: #0e0e0e;
+    --card-border: #1f1f1f;
 
     /* Shadcn/UI Compatible Tokens */
     --background: 0 0% 0%;
@@ -188,7 +188,8 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "HelveticaNeue", system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: "HelveticaNeue", system-ui, Avenir, Helvetica, Arial,
+      sans-serif;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: 0;
@@ -204,225 +205,220 @@
   h4,
   h5,
   h6 {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "HelveticaNeue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    line-height: 1.1;
-    margin: 0;
-    letter-spacing: 0;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "HelveticaNeue", Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: 3.2em;
+    }
+
+    /* Navbar Link Styling */
+    a {
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: hsl(var(--tedx-red));
+    }
+
+    /* Buttons Reset */
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    button:focus-visible {
+      outline: 2px solid hsl(var(--tedx-red));
+      outline-offset: 2px;
+    }
   }
 
-  h1 {
-    font-size: 3.2em;
+  /* -------------------------------------------------------------------------- */
+  /*                                COMPONENTS                                  */
+  /* -------------------------------------------------------------------------- */
+
+  @layer components {
+    /* Button Variants */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.5rem;
+      font-weight: 700;
+      border-radius: 9999px;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: hsl(var(--tedx-red));
+      color: var(--white);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: #cf001f;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: hsl(var(--tedx-red));
+      border: 1px solid hsl(var(--tedx-red));
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus {
+      background: rgba(235, 0, 40, 0.1);
+    }
+
+    /* Core Card Style */
+    .card-core {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Page Transition */
+    .page-transition {
+      animation: fadeInUp 360ms ease both;
+    }
   }
 
-  /* Navbar Link Styling */
-  a {
-    font-weight: 500;
-    color: var(--white);
-    text-decoration: none;
-    transition: color 0.2s ease;
+  /* -------------------------------------------------------------------------- */
+  /*                                UTILITIES                                   */
+  /* -------------------------------------------------------------------------- */
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  a:hover {
-    color: hsl(var(--tedx-red));
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  /* Buttons Reset */
-  button {
-    font-family: inherit;
-    cursor: pointer;
-    border: none;
-    outline: none;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
 
-  button:focus-visible {
-    outline: 2px solid hsl(var(--tedx-red));
-    outline-offset: 2px;
-  }
-}
+  @keyframes countdown-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
 
-/* -------------------------------------------------------------------------- */
-/*                                COMPONENTS                                  */
-/* -------------------------------------------------------------------------- */
-
-@layer components {
-
-  /* Button Variants */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.5rem;
-    font-weight: 700;
-    border-radius: 9999px;
-    transition: all 0.2s ease;
-    font-size: 1rem;
+    50% {
+      transform: scale(1.02);
+    }
   }
 
-  .btn-primary {
-    background: hsl(var(--tedx-red));
-    color: var(--white);
+  @layer utilities {
+    .animate-fade-in-up {
+      animation: fade-in-up 0.6s ease-out forwards;
+    }
+
+    .animate-fade-in {
+      animation: fade-in 0.4s ease-out forwards;
+    }
+
+    .animation-delay-100 {
+      animation-delay: 100ms;
+    }
+
+    .animation-delay-200 {
+      animation-delay: 200ms;
+    }
+
+    .animation-delay-300 {
+      animation-delay: 300ms;
+    }
+
+    .animation-delay-400 {
+      animation-delay: 400ms;
+    }
+
+    .animation-delay-500 {
+      animation-delay: 500ms;
+    }
   }
 
-  .btn-primary:hover,
-  .btn-primary:focus {
-    background: #cf001f;
-    transform: translateY(-1px);
+  @keyframes countdown-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.02);
+    }
   }
 
-  .btn-secondary {
-    background: transparent;
-    color: hsl(var(--tedx-red));
-    border: 1px solid hsl(var(--tedx-red));
-  }
+  @layer utilities {
+    .animate-fade-in-up {
+      animation: fade-in-up 0.6s ease-out forwards;
+    }
 
-  .btn-secondary:hover,
-  .btn-secondary:focus {
-    background: rgba(235, 0, 40, 0.1);
-  }
+    .animate-fade-in {
+      animation: fade-in 0.4s ease-out forwards;
+    }
 
-  /* Core Card Style */
-  .card-core {
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  }
+    .animation-delay-100 {
+      animation-delay: 100ms;
+    }
 
-  /* Page Transition */
-  .page-transition {
-    animation: fadeInUp 360ms ease both;
-  }
-}
+    .animation-delay-200 {
+      animation-delay: 200ms;
+    }
 
-/* -------------------------------------------------------------------------- */
-/*                                UTILITIES                                   */
-/* -------------------------------------------------------------------------- */
+    .animation-delay-300 {
+      animation-delay: 300ms;
+    }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
+    .animation-delay-400 {
+      animation-delay: 400ms;
+    }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes countdown-pulse {
-
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.02);
-  }
-}
-
-@layer utilities {
-  .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out forwards;
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.4s ease-out forwards;
-  }
-
-  .animation-delay-100 {
-    animation-delay: 100ms;
-  }
-
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .animation-delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
-
-  .animation-delay-500 {
-    animation-delay: 500ms;
-  }
-}
-
-@keyframes countdown-pulse {
-  0%,
- 
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.02);
-  }
-}
-
-@layer utilities {
-  .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out forwards;
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.4s ease-out forwards;
-  }
-
-  .animation-delay-100 {
-    animation-delay: 100ms;
-  }
-
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .animation-delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
-
-  .animation-delay-500 {
-    animation-delay: 500ms;
+    .animation-delay-500 {
+      animation-delay: 500ms;
+    }
   }
 }
