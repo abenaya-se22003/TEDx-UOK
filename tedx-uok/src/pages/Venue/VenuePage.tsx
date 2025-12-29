@@ -5,7 +5,7 @@ import Footer from "../../components/layout/Footer";
 import Card from "../../components/ui/Card";
 import Section from "../../components/ui/Section";
 import { Button } from "../../components/ui/Button";
-import { Bus, SquareParking, Users, Ticket } from "lucide-react";
+import { Bus, SquareParking, Users, Ticket, Phone } from "lucide-react";
 import Loading from "../../components/states/Loading";
 import Error from "../../components/states/Error";
 import Empty from "../../components/states/Empty";
@@ -23,9 +23,14 @@ interface Venue {
   google_maps_url?: string;
   google_maps_url_embd?: string;
   google_maps_dir_url?: string;
+  entry_guidelines?: string;
 }
 
+import { useSEO } from "../../hooks/useSEO";
+import { seoConfig } from "../../config/seo";
+
 const VenuePage: React.FC = () => {
+  useSEO(seoConfig.venue);
   const [venue, setVenue] = useState<Venue | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -99,11 +104,9 @@ const VenuePage: React.FC = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col">
-        <Navbar />
         <div className="flex-grow flex items-center justify-center">
           <Error message={error} onRetry={fetchVenue} />
         </div>
-        <Footer />
       </div>
     );
   }
@@ -111,19 +114,15 @@ const VenuePage: React.FC = () => {
   if (!venue) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col">
-        <Navbar />
         <div className="flex-grow flex items-center justify-center">
           <Empty message="Venue information not available." />
         </div>
-        <Footer />
       </div>
     );
   }
 
   return (
     <div className="w-full min-h-screen bg-black text-white flex flex-col">
-      <Navbar />
-
       {/* Inner container */}
       <div className="max-w-[1280px] mx-auto px-4 py-16 flex-grow w-full">
         {/* Header */}
@@ -272,8 +271,7 @@ const VenuePage: React.FC = () => {
                     </h3>
                   </div>
                   <p className="text-gray-400 font-light leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
-                    Please arrive 45 minutes prior to the start time. Ensure you
-                    have your digital or printed ticket ready for scanning.
+                    {venue.entry_guidelines || "Information not available"}
                   </p>
                 </div>
                 {/* Decorative Watermark */}
@@ -283,7 +281,6 @@ const VenuePage: React.FC = () => {
           </div>
         </Section>
       </div>
-      <Footer />
     </div>
   );
 };
