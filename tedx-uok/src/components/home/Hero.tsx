@@ -1,7 +1,29 @@
 import { ArrowRight } from "lucide-react";
-import { Button } from "./ui/Button";
+import { Button } from "../ui/Button";
+import { Link } from "react-router-dom";
 
-const Hero = () => {
+interface props {
+  date: string | null;
+  venue: string | null;
+  theme: string | null;
+  ctaLabel?: string;
+  ctaLink?: string;
+}
+
+const Hero = ({ date, venue, theme, ctaLabel, ctaLink }: props) => {
+  const eventDate = date
+    ? new Date(date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "Date To Be Announced";
+
+  const eventVenue = venue || "Venue To Be Annouced";
+  const eventTheme = theme || "Theme To Be Annouced";
+  const primaryLabel = ctaLabel || "Register Now";
+  const primaryLink = ctaLink || "/register";
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
       {/* Background Pattern */}
@@ -35,12 +57,12 @@ const Hero = () => {
               <span className="text-primary">TED</span>
               <span className="text-primary absolute top-[-20%] ">x</span>
               <span className="opacity-0">x</span>
-              <span className="text-foreground ">UOK</span>
+              <span className="text-foreground "> UoK</span>
             </h1>
 
             {/* Theme */}
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-8 opacity-0 animate-fade-in-up animation-delay-200">
-              Ideas Worth Spreading
+              {eventTheme}
             </h2>
 
             {/* Event Details */}
@@ -52,7 +74,7 @@ const Hero = () => {
                     Date
                   </p>
                   <p className="text-lg font-medium text-foreground">
-                    March 15, 2026
+                    {eventDate}
                   </p>
                 </div>
               </div>
@@ -63,7 +85,7 @@ const Hero = () => {
                     Venue
                   </p>
                   <p className="text-lg font-medium text-foreground">
-                    University of Kelaniya
+                    {eventVenue}
                   </p>
                 </div>
               </div>
@@ -71,13 +93,17 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up animation-delay-400">
-              <Button variant="tedxPrimary" size="xl">
-                Register Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button variant="tedxSecondary" size="xl">
-                Learn More
-              </Button>
+              <Link to={primaryLink}>
+                <Button variant="tedxPrimary" size="xl">
+                  {primaryLabel}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link to="/about">
+                <Button variant="tedxSecondary" size="xl">
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </div>
 
