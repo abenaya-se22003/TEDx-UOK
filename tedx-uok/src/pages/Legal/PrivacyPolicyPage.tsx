@@ -1,12 +1,15 @@
-// src/pages/Legal/PrivacyPolicyPage.tsx
+import { useSEO } from "../../hooks/useSEO";
+import { seoConfig } from "../../config/seo";
+
 export default function PrivacyPolicyPage() {
+  useSEO(seoConfig.privacy);
+
   return (
     <main className="bg-black w-full">
       <section className="px-6 py-32">
         <div className="mx-auto max-w-4xl space-y-12">
           {/* Header */}
           <div className="text-center space-y-4">
-            <p className="text-sm uppercase text-[#EB0028]">LEGAL</p>
             <h1 className="text-4xl md:text-5xl font-bold text-white">
               Privacy & <span className="text-[#EB0028]">Data Policy</span>
             </h1>
@@ -22,7 +25,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Information We Collect - Card Style */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-2xl font-semibold !mb-6">
                 Information <span className="text-[#EB0028]"> We Collect</span>
               </h2>
               <div className="grid gap-4 md:grid-cols-2">
@@ -51,7 +54,7 @@ export default function PrivacyPolicyPage() {
 
             {/* How We Use Your Information - Card Style */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-2xl font-semibold !mb-6">
                 How We Use
                 <span className="text-[#EB0028]"> Your Information</span>
               </h2>
@@ -85,7 +88,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-2xl font-semibold !mb-6">
                 Data
                 <span className="text-[#EB0028]"> Storage Security</span>
               </h2>
@@ -99,7 +102,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Your Rights - Card Style */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-2xl font-semibold !mb-6">
                 Your <span className="text-[#EB0028]">Rights</span>
               </h2>
               <div className="grid gap-4 md:grid-cols-2">
@@ -132,14 +135,14 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-2xl font-semibold !mb-6">
                 Contact <span className="text-[#EB0028]">Us</span>
               </h2>
               <p>
                 For privacy-related questions, contact us at{" "}
                 <a
                   href="mailto:privacy@tedxuok.com"
-                  className="text-[#EB0028] hover:text-red-500 underline"
+                  className="!font-semibold hover:text-[#B09F8D] underline"
                 >
                   privacy@tedxuok.com
                 </a>
