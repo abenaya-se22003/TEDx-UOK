@@ -1,36 +1,41 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight, Globe, Handshake, Lightbulb } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { supabase } from '../../lib/supabase';
+import { Link } from "react-router-dom";
+import { ArrowRight, Globe, Handshake, Lightbulb } from "lucide-react";
+import { useEffect, useState } from "react";
+import { supabase } from "../../lib/supabase"; // මෙතැනින් import කරන්න
 
 export default function AboutPage() {
-  const [theme, setTheme] = useState('Breaking Boundaries');
-  const [description, setDescription] = useState('Exploring the edges of possibility and the courage to venture beyond');
+  const [theme, setTheme] = useState("Breaking Boundaries");
+  const [description, setDescription] = useState(
+    "Exploring the edges of possibility and the courage to venture beyond"
+  );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       if (!supabase) {
-        console.warn('Supabase client not initialized, using default values');
+        console.warn("Supabase client not initialized, using default values");
         setLoading(false);
         return;
       }
 
       try {
         const { data, error } = await supabase
-          .from('events')
-          .select('theme, description')
-          .eq('event_id', '1268c78b-d746-42ee-8021-1cd276ce0ff8')
+          .from("events")
+          .select("theme, description")
+          .eq("event_id", "1268c78b-d746-42ee-8021-1cd276ce0ff8")
           .single();
 
         if (error) {
-          console.error('Supabase error:', error);
+          console.error("Supabase error:", error);
         } else if (data) {
-          setTheme(data.theme || 'Breaking Boundaries');
-          setDescription(data.description || 'Exploring the edges of possibility and the courage to venture beyond');
+          setTheme(data.theme || "Breaking Boundaries");
+          setDescription(
+            data.description ||
+            "Exploring the edges of possibility and the courage to venture beyond"
+          );
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
@@ -49,7 +54,7 @@ export default function AboutPage() {
               TED<sup className="text-[0.8em] align-super">x</sup>UoK
             </span>
           </h1>
-          
+
           <div className="mb-8">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               {loading ? (
@@ -58,7 +63,7 @@ export default function AboutPage() {
                 theme
               )}
             </h2>
-            
+
             {loading ? (
               <div className="text-2xl text-muted-foreground max-w-4xl mx-auto">
                 <div className="h-6 w-full max-w-2xl bg-gray-200 rounded animate-pulse mx-auto"></div>
@@ -77,7 +82,7 @@ export default function AboutPage() {
             className="group bg-card border border-border rounded-lg p-8 hover:border-primary transition-all duration-300"
           >
             <div className="mb-6">
-              <span className="text-primary font-bold text-4xl sm:text-5xl">TED</span>
+              <span className="text-primary font-bold text-5xl">TED</span>
             </div>
             <h2 className="text-2xl font-bold text-foreground mb-4">
               About TED
@@ -105,7 +110,9 @@ export default function AboutPage() {
               About TED<sup className="text-[0.7em] align-super">x</sup>
             </h2>
             <p className="text-muted-foreground mb-6">
-              Learn about the TED<sup className="text-[0.6em] align-super">x</sup> program, licensing, and how it differs from TED conferences.
+              Learn about the TED
+              <sup className="text-[0.6em] align-super">x</sup> program,
+              licensing, and how it differs from TED conferences.
             </p>
             <div className="flex items-center text-foreground font-medium group-hover:text-primary transition-colors">
               Learn more
@@ -121,7 +128,9 @@ export default function AboutPage() {
               <span className="text-primary font-bold text-5xl">
                 TED<sup className="text-[0.6em] align-super">x</sup>
               </span>
-              <span className="text-foreground font-bold text-5xl ml-2">UoK</span>
+              <span className="text-foreground font-bold text-5xl ml-2">
+                UoK
+              </span>
             </div>
             <h2 className="text-2xl font-bold text-foreground mb-4">
               About TED<sup className="text-[0.7em] align-super">x</sup>UoK
@@ -183,7 +192,8 @@ export default function AboutPage() {
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">
-                  TED<sup className="text-[0.6em] align-super">x</sup>UoK 2026 Theme
+                  TED<sup className="text-[0.6em] align-super">x</sup>UoK 2026
+                  Theme
                 </h3>
                 <p className="text-muted-foreground">
                   <span className="font-semibold text-primary">{theme}</span>
