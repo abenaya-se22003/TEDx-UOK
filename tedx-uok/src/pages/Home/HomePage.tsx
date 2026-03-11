@@ -1,9 +1,9 @@
-import { supabase } from "../../api/supabaseClient";
+// import { supabase } from "../../api/supabaseClient";
 
 // Import ALL Hooks
 import { useEvents } from "../../hooks/useEvents";
-import { useSpeakers } from "../../hooks/useSpeakers";
-import { usePartners } from "../../hooks/usePartners";
+// import { useSpeakers } from "../../hooks/useSpeakers";
+// import { usePartners } from "../../hooks/usePartners";
 import { useSettings } from "../../hooks/useSettings";
 
 // Import Components
@@ -16,27 +16,27 @@ import Highlights from "../../components/home/Highlights";
 import { ThemePreview } from "../../components/home/ThemePreview";
 // import { Partners, type Partner } from "../../components/home/Partners";
 
-const SPEAKER_BUCKET = import.meta.env.VITE_SUPABASE_BUCKET_SPEAKER_PHOTOS;
-const PARTNER_BUCKET = import.meta.env.VITE_SUPABASE_BUCKET_PARTNER_LOGOS;
+// const SPEAKER_BUCKET = import.meta.env.VITE_SUPABASE_BUCKET_SPEAKER_PHOTOS;
+// const PARTNER_BUCKET = import.meta.env.VITE_SUPABASE_BUCKET_PARTNER_LOGOS;
 
-const getImageUrl = (path: string | null, bucketName: string) => {
-  if (!path)
-    return "https://ui-avatars.com/api/?name=TEDx&background=EB0028&color=fff&size=400";
+// const getImageUrl = (path: string | null, bucketName: string) => {
+//   if (!path)
+//     return "https://ui-avatars.com/api/?name=TEDx&background=EB0028&color=fff&size=400";
 
-  if (path.startsWith("http")) return path;
+//   if (path.startsWith("http")) return path;
 
-  // Uses the specific bucket passed to the function
-  const { data } = supabase.storage.from(bucketName).getPublicUrl(path);
-  return data.publicUrl;
-};
+//   // Uses the specific bucket passed to the function
+//   const { data } = supabase.storage.from(bucketName).getPublicUrl(path);
+//   return data.publicUrl;
+// };
 
 const HomePage = () => {
   const { settings, loading: settingsLoading } = useSettings();
   const { event, loading: eventLoading } = useEvents();
-  const { speakers: rawSpeakers, loading: speakersLoading } = useSpeakers(3);
-  const { partners: rawPartners, loading: partnersLoading } = usePartners();
+  // const { speakers: rawSpeakers, loading: speakersLoading } = useSpeakers(3);
+  // const { partners: rawPartners, loading: partnersLoading } = usePartners();
 
-  if (eventLoading || speakersLoading || partnersLoading || settingsLoading) {
+  if (eventLoading || settingsLoading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center text-white">
         <div className="animate-pulse flex flex-col items-center">
@@ -74,7 +74,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-background relative top-[-65px]">
+      <div className="relative -top-16.25 min-h-screen bg-background">
         <Hero
           date={eventDate}
           venue={eventVenue}
